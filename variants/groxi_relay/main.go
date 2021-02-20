@@ -2,13 +2,21 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"github.com/defektive/groxi/common"
 	"github.com/defektive/groxi/relay"
 )
 
-var tunnelAddr = flag.String("tunnel", "127.0.0.1:8081", "The bind address on which to accept tunnel connections")
-var maxFailedConnections = flag.Int("fail", 30, "The number of connections to try before giving up. 30 is about 15 minutes. NOTE: exponential falloff on retries. sleepMilis(failedAttemptCount * failedAttemptCount * 100)")
+var maxFailedConnections = flag.Int("f", 30, "The number of connections to try before giving up. NOTE: Exponential fall off")
+var tunnelAddr = flag.String("t", "127.0.0.1:8081", "Address to connect to server on.")
+var version = flag.Bool("v", false, "Print groxi version")
 
 func main() {
 	flag.Parse()
+	if *version {
+		fmt.Printf("groxi v%s\n", common.Version)
+		return
+	}
+
 	relay.New(*tunnelAddr, *maxFailedConnections)
 }

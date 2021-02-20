@@ -37,7 +37,7 @@ bash snippet to help you decide what number to use.
 
 func init() {
 	rootCmd.AddCommand(relayCmd)
-	relayCmd.Flags().StringVarP(&tunnelAddr, "tunnel", "t", "127.0.0.1:8081", "The bind address on which to accept tunnel connections")
 
 	relayCmd.Flags().IntVarP(&maxFailedConnections, "fail", "f", 30, "The number of connections to try before giving up. 30 is about 15 minutes.")
+	relayCmd.Flags().StringVarP(&tunnelAddr, "tunnel", "t", "127.0.0.1:8081", "The bind address on which to accept tunnel connections")
 }

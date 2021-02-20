@@ -73,10 +73,11 @@ Global Flags:
 
 ```
 Usage of groxi_relay:
-  -fail int
-    	The number of connections to try before giving up. 30 is about 15 minutes. NOTE: exponential falloff on retries. sleepMilis(failedAttemptCount * failedAttemptCount * 100) (default 30)
-  -tunnel string
-    	The bind address on which to accept tunnel connections (default "127.0.0.1:8081")
+  -f int
+      The number of connections to try before giving up. NOTE: Exponential fall off (default 30)
+  -t string
+      Address to connect to server on. (default "127.0.0.1:8081")
+  -v	Print groxi version
 ```
 
 ******
@@ -86,10 +87,11 @@ Usage of groxi_relay:
 
 ```
 Usage of groxi_server:
-  -socks string
-    	The bind address on which to listen for socks clients (default "127.0.0.1:1080")
-  -tunnel string
-    	The bind address on which to accept tunnel connections (default "127.0.0.1:8081")
+  -s string
+      Address to accept socks connections on. (default "127.0.0.1:1080")
+  -t string
+      Address to accept relay connections on. (default "127.0.0.1:8081")
+  -v	prints groxi version
 ```
 
 **************
