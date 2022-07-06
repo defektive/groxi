@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/defektive/groxi/common"
+	"github.com/defektive/groxi/internal"
 	"github.com/spf13/cobra"
 )
 
@@ -15,6 +15,6 @@ var versionCmd = &cobra.Command{
 	Short: "Print the version number of groxi",
 	Long:  `All software has versions. This is groxi's`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("groxi v%s\n", common.Version)
+		fmt.Printf("groxi v%s\n", internal.Version)
 	},
 }

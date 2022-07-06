@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/defektive/groxi/server"
+	"github.com/defektive/groxi/pkg/server"
 	"github.com/spf13/cobra"
 	"log"
 	"os"

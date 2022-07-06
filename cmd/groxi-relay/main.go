@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/defektive/groxi/common"
-	"github.com/defektive/groxi/relay"
+	"github.com/defektive/groxi/internal"
+	"github.com/defektive/groxi/pkg/relay"
 )
 
 var maxFailedConnections = flag.Int("f", 30, "The number of connections to try before giving up. NOTE: Exponential fall off")
@@ -14,7 +14,7 @@ var version = flag.Bool("v", false, "Print groxi version")
 func main() {
 	flag.Parse()
 	if *version {
-		fmt.Printf("groxi v%s\n", common.Version)
+		fmt.Printf("groxi v%s\n", internal.Version)
 		return
 	}
 

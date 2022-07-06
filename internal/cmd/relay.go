@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/defektive/groxi/relay"
+	"github.com/defektive/groxi/pkg/relay"
 	"github.com/spf13/cobra"
 	"io/ioutil"
 	"log"

@@ -1,24 +1,24 @@
 GOOSES = linux darwin windows
 GOARCHS = amd64
-VARIANTS = variants/*
+VARIANTS = cmd/*
 MOD = recon
 OS = linux
 ARCH = amd64
 NAME = groxi
-build: variants/
+build: cmd/
 	rm -rf dist; \
 	for var in $(VARIANTS); do \
 		for os in $(GOOSES); do \
 			for arch in $(GOARCHS); do \
 			  cd $$var;\
 				echo $$var $$os $$arch; \
-				GOOS=$$os GOARCH=$$arch go build -ldflags="-s -w" -o ../../dist/$$os/$$arch/$$(echo $$var|sed 's/variants/bin/'); \
+				CGO_ENABLED=0 GOOS=$$os GOARCH=$$arch go build -ldflags="-s -w" -o ../../dist/$$os/$$arch/$$(echo $$var|sed 's/variants/bin/'); \
 				cd - ; \
 			done \
 		done \
 	done
 
-upx: variants/
+upx: cmd/
 	for var in $(VARIANTS); do \
 		for os in $(GOOSES); do \
 			for arch in $(GOARCHS); do \
