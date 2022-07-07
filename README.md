@@ -68,7 +68,7 @@ Global Flags:
 
 *******
 
-`groxi_relay`
+`groxi-relay`
 -------------------
 
 ```
@@ -82,7 +82,7 @@ Usage of groxi_relay:
 
 ******
 
-`groxi_server`
+`groxi-server`
 -------------------
 
 ```
@@ -92,6 +92,22 @@ Usage of groxi_server:
   -t string
       Address to accept relay connections on. (default "127.0.0.1:8081")
   -v	prints groxi version
+```
+
+**************
+
+Installing
+----------
+
+```bash
+# main groxi command
+go install github.com/defektive/groxi/cmd/groxi@latest
+
+# just the server
+go install github.com/defektive/groxi/cmd/groxi-server@latest
+
+# just the relay
+go install github.com/defektive/groxi/cmd/groxi-relay@latest
 ```
 
 **************
