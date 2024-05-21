@@ -2,11 +2,16 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/spf13/cobra"
 )
 
 var debug bool
+
+func SetVersionInfo(versionStr, commitStr string) {
+	rootCmd.Version = fmt.Sprintf("%s-%s", versionStr, commitStr)
+}
 
 var rootCmd = &cobra.Command{
 	Use:   "groxi",
