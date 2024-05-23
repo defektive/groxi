@@ -26,7 +26,7 @@ var serverCmd = &cobra.Command{
 			log.SetOutput(os.Stdout)
 		}
 
-		server.New(tunnelAddress, socksAddress)
+		server.New(tunnelAddress, socksAddress, debug)
 	},
 }
 

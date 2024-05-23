@@ -21,7 +21,7 @@ import (
 var tunnelAddress string
 var socksAddress string
 
-func New(tunnelAddress string, socksAddress string) {
+func New(tunnelAddress string, socksAddress string, debug bool) {
 	server, err := createTunnelServer(tunnelAddress)
 	if err != nil {
 		log.Println(err)
@@ -36,7 +36,7 @@ func New(tunnelAddress string, socksAddress string) {
 			log.Println(err)
 			return
 		}
-		handleConnection(conn, socksAddress)
+		handleConnection(conn, socksAddress, debug)
 	}
 }
 
@@ -152,7 +152,11 @@ func certsetup() (certPEM *bytes.Buffer, certPrivKeyPEM *bytes.Buffer, err error
 	return
 }
 
-func handleConnection(conn net.Conn, socksHost string) {
+func handleConnection(conn net.Conn, socksHost string, debug bool) {
+	if debug {
+		log.Printf("Connection from %s\n", conn.RemoteAddr())
+	}
+
 	// Wrap connection in yamux
 	session, err := yamux.Server(conn, nil)
 	if err != nil {
@@ -171,13 +175,20 @@ func handleConnection(conn net.Conn, socksHost string) {
 	defer socksServer.Close()
 
 	// Accept on socksv5 port; open new stream and start new goroutine to proxy
-	log.Println("[+] Waiting for SOCKS clients on " + socksHost)
+	if debug {
+		log.Println("Waiting for SOCKS clients on " + socksHost)
+	}
+
 	for {
 		client, err := socksServer.Accept()
 		if err != nil {
 			log.Println("[!] Error accepting connection from SOCKS client: " + err.Error())
 			continue
 		}
+		if debug {
+			log.Printf("Socks connection from %s\n", client.RemoteAddr())
+		}
+
 		stream, err := session.Open()
 		if err != nil {
 			log.Println("[+] Error opening new stream in tunnel: " + err.Error())
